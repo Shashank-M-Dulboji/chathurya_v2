@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/nandan03/Documents/chathurya/app/layout\":[\"static/media/e4af272ccee01ff0-s.p.woff2\",\"static/media/06084a2f60b23053-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"

@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ───────────────────────────────── */
+:root {
+  --neon: #dcf763;
+  --neon-dim: #8a9e3d;
+  --neon-glow: rgba(220, 247, 99, 0.15);
+  --black: #0a0a0a;
+  --dark: #0d0d0d;
+  --surface: #161616;
+  --border: #222222;
+  --border-light: #2e2e2e;
+  --muted: #666666;
+  --light: #999999;
+  --off-white: #ebebeb;
+  --slate: #3a4448;
+}
+
+/* ─── Base ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  background-color: var(--black);
+  color: var(--off-white);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Font Utilities ──────────────────────────────────────── */
+.font-michroma { font-family: var(--font-michroma), sans-serif; }
+.font-inter    { font-family: var(--font-inter), system-ui, sans-serif; }
+.font-mono     { font-family: "JetBrains Mono", "Courier New", monospace; }
+
+/* ─── Selection ───────────────────────────────────────────── */
+::selection { background: var(--neon); color: var(--black); }
+
+/* ─── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--neon-dim); }
+
+/* ─── Grid Background ─────────────────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(220,247,99,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220,247,99,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.bg-grid-sm {
+  background-image:
+    linear-gradient(rgba(220,247,99,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220,247,99,0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ─── Scanlines ───────────────────────────────────────────── */
+.scanlines::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Logo Flicker ────────────────────────────────────────── */
+@keyframes logoFlicker {
+  0%,  88%,  90%, 92%, 94%, 97%, 100% { opacity: 1; filter: brightness(1); }
+  89% { opacity: 0.15; filter: brightness(0.5); }
+  91% { opacity: 0.8;  filter: brightness(1.2); }
+  93% { opacity: 0.05; filter: brightness(0.2); }
+  95% { opacity: 0.9;  filter: brightness(1.1); }
+  96% { opacity: 0.3;  filter: brightness(0.6); }
+}
+
+.logo-flicker { animation: logoFlicker 5s infinite; }
+
+/* ─── Glitch Text ─────────────────────────────────────────── */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: var(--neon);
+}
+
+.glitch::before {
+  animation: glitchBefore 4s infinite linear;
+  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+}
+
+.glitch::after {
+  animation: glitchAfter 4s 0.15s infinite linear;
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchBefore {
+  0%,  82%, 100% { transform: none; opacity: 0; }
+  83% { transform: translateX(-6px) skewX(3deg); opacity: 0.9; }
+  85% { transform: translateX(4px) skewX(-2deg); opacity: 0.7; }
+  87% { transform: translateX(-2px); opacity: 0.8; }
+  89% { transform: none; opacity: 0; }
+}
+
+@keyframes glitchAfter {
+  0%,  84%, 100% { transform: none; opacity: 0; }
+  85% { transform: translateX(6px) skewX(-3deg); opacity: 0.8; }
+  87% { transform: translateX(-4px) skewX(2deg); opacity: 0.6; }
+  89% { transform: none; opacity: 0; }
+}
+
+/* ─── Neon Text Glow ──────────────────────────────────────── */
+.neon-text {
+  color: var(--neon);
+  text-shadow: 0 0 30px rgba(220,247,99,0.4), 0 0 60px rgba(220,247,99,0.1);
+}
+
+/* ─── Corner Marks ────────────────────────────────────────── */
+.corner-tl::before,
+.corner-tl::after,
+.corner-br::before,
+.corner-br::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(220,247,99,0.4);
+  border-style: solid;
+}
+
+.corner-tl::before { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.corner-tl::after  { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+/* ─── Cards ───────────────────────────────────────────────── */
+.card-dark {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  position: relative;
+  transition: border-color 0.25s ease;
+}
+
+.card-dark:hover { border-color: rgba(220,247,99,0.25); }
+
+.card-dark::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.card-dark:hover::before { opacity: 0.6; }
+
+/* ─── Input ───────────────────────────────────────────────── */
+.input-dark {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--off-white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-dark:focus {
+  outline: none;
+  border-color: var(--neon);
+  box-shadow: 0 0 0 3px rgba(220,247,99,0.06);
+}
+
+/* ─── Buttons ─────────────────────────────────────────────── */
+.btn-neon {
+  background: var(--neon);
+  color: var(--black);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.15s, transform 0.12s, box-shadow 0.2s;
+}
+
+.btn-neon:hover {
+  background: #e8ff70;
+  box-shadow: 0 0 20px rgba(220,247,99,0.25);
+}
+
+.btn-neon:active { transform: scale(0.97); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--off-white);
+  border: 1px solid var(--border-light);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--neon);
+  color: var(--neon);
+  background: rgba(220,247,99,0.04);
+}
+
+/* ─── Skill Pill ──────────────────────────────────────────── */
+.skill-pill {
+  background: rgba(220,247,99,0.06);
+  border: 1px solid rgba(220,247,99,0.18);
+  color: var(--neon);
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 2px;
+  text-transform: lowercase;
+  display: inline-block;
+  letter-spacing: 0.02em;
+}
+
+/* ─── XP bar ──────────────────────────────────────────────── */
+.xp-bar { background: var(--border); height: 2px; border-radius: 1px; overflow: hidden; }
+.xp-bar-fill { height: 100%; background: var(--neon); border-radius: 1px; transition: width 1.2s ease-out; }
+
+/* ─── Status dot ──────────────────────────────────────────── */
+.status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.status-dot.active { background: var(--neon); box-shadow: 0 0 6px rgba(220,247,99,0.5); }
+.status-dot.idle   { background: var(--muted); }
+.status-dot.ghost  { background: var(--slate); }
+
+/* ─── Rank badges ─────────────────────────────────────────── */
+.rank-badge { font-weight: 700; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 3px; }
+.rank-1 { background: var(--neon); color: var(--black); }
+.rank-2 { background: #6b7280; color: var(--black); }
+.rank-3 { background: #78422a; color: var(--off-white); }
+.rank-n { background: var(--surface); border: 1px solid var(--border); color: var(--muted); }
+
+/* ─── Reduce motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
