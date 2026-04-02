@@ -29,7 +29,7 @@ interface ProfileViewProps {
     uid: string;
     fullName: string;
     role: string;
-    batchYear: number;
+    batchYear: number | null;
     bio?: string | null;
     githubUrl?: string | null;
     linkedinUrl?: string | null;

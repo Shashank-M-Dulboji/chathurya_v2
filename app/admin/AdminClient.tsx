@@ -17,7 +17,7 @@ type Tab = "members" | "invite" | "nfc" | "import";
 
 interface Member {
   id: string; uid: string; full_name: string; email: string;
-  role: string; batch_year: number; is_active: boolean; created_at: string;
+  role: string; batch_year: number | null; is_active: boolean; created_at: string;
   profiles: { xp_total?: number; avatar_url?: string | null; archetype_primary?: string | null } | null;
 }
 

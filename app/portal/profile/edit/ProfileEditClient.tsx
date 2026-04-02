@@ -28,7 +28,7 @@ const ARCHETYPE_OPTIONS = [
 
 interface ProfileEditClientProps {
   member: {
-    id: string; uid: string; full_name: string; role: string; batch_year: number;
+    id: string; uid: string; full_name: string; role: string; batch_year: number | null;
     profiles: {
       bio?: string | null; github_url?: string | null; linkedin_url?: string | null;
       portfolio_url?: string | null; avatar_url?: string | null;

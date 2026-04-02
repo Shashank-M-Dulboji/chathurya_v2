@@ -16,7 +16,7 @@ const ARCHETYPE_EMOJI: Record<string, string> = {
 
 interface Props {
   member: {
-    id: string; uid: string; full_name: string; role: string; batch_year: number;
+    id: string; uid: string; full_name: string; role: string; batch_year: number | null;
     profiles: { avatar_url?: string | null; xp_total?: number; archetype_primary?: string | null } | null;
   };
   profileUrl: string;

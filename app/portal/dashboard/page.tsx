@@ -49,15 +49,13 @@ export default async function DashboardPage() {
         uid: member.uid,
         fullName: member.full_name,
         role: member.role,
-        batchYear: member.batch_year,
+        batchYear: member.batch_year ?? 0,
         avatarUrl: member.profiles?.avatar_url,
-        bio: member.profiles?.bio,
-        visibilityMode: member.profiles?.visibility_mode ?? "public",
         archetypePrimary: member.profiles?.archetype_primary,
         xpTotal: member.profiles?.xp_total ?? 0,
         streakCount: member.profiles?.streak_count ?? 0,
-        badgeCount: member.badges?.length ?? 0,
-        workshopsAttended: member.attendance?.length ?? 0,
+        badgeCount: Array.isArray(member.badges) ? member.badges.length : member.badges ? 1 : 0,
+        workshopsAttended: Array.isArray(member.attendance) ? member.attendance.length : member.attendance ? 1 : 0,
         rank: (myRank ?? 0) + 1,
       }}
       leaderboard={leaderboard ?? []}

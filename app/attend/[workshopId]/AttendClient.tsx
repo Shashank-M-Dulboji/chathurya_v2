@@ -55,6 +55,7 @@ export default function AttendClient({
     const { error } = await supabase.from("attendance").insert({
       member_id: member.id,
       workshop_id: workshop.id,
+      checked_in_at: new Date().toISOString(),
       is_late: isLateCheckIn,
       xp_earned: xp,
     });

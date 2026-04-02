@@ -20,7 +20,7 @@ interface LeaderboardEntry {
   streak_count: number;
   archetype_primary: string | null;
   avatar_url: string | null;
-  members: { full_name: string; uid: string; role: string; batch_year: number } | null;
+  members: { full_name: string; uid: string; role: string; batch_year: number | null } | null;
 }
 
 function Avatar({ url, name, size = 36 }: { url?: string | null; name: string; size?: number }) {
